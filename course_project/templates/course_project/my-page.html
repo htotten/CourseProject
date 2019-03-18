@@ -1,0 +1,301 @@
+{%  extends 'base/base.html' %}
+
+{%  block context %}
+
+
+    <div class="container" align="right">
+     {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+        <p><a href="{% url 'logout' %}">logout</a></p>
+    {% else %}
+          <p>You are not logged in</p>
+          <a href="{% url 'login' %}">login</a>
+    {% endif %}
+    </div>
+
+
+
+
+
+
+
+<div class="container" align="center">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+              </button>
+           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+<form method="POST" action="{%  url 'add-course' %}" >
+    {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-4" id="overflowTest">
+                {%  for course in course_data %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                        {{ course }}
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+
+
+            <div class="col-lg-4" id="overflowTest">
+                First Year
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr1-sem1" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 1
+                      </label>
+                </div>
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr1-sem2" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 2
+                      </label>
+                </div>
+
+                <br>
+
+                Second Year
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr2-sem1" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 3
+                      </label>
+                </div>
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr2-sem2" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 4
+                      </label>
+                </div>
+                <br>
+
+                Third Year
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr3-sem1" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 5
+                      </label>
+                </div>
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr3-sem2" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 6
+                      </label>
+                </div>
+                <br>
+
+                Fourth Year
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr4-sem1" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 7
+                      </label>
+                </div>
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="yr4-sem2" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 8
+                      </label>
+                </div>
+                <br>
+
+                Extra
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-semester" value="extra-sem" id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        Semester 9
+                      </label>
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-2"></div>
+
+        </div>
+
+    </div>
+
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+<form method="POST" action="{%  url 'delete-course' %}" >
+    {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3" id="overflowTest">
+                {%  for course in sem1 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+            <div class="col-lg-3" id="overflowTest">
+                {%  for course in sem2 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+
+
+            <div class="col-lg-3" id="overflowTest2">
+                {%  for course in sem3 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+
+            <div class="col-lg-3" id="overflowTest2">
+                {%  for course in sem4 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+            <div class="col-lg-3" id="overflowTest2">
+                {%  for course in sem5 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+            <div class="col-lg-3" id="overflowTest2">
+                {%  for course in sem6 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+            <div class="col-lg-3" id="overflowTest">
+                {%  for course in sem7 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+            <div class="col-lg-3" id="overflowTest">
+                {%  for course in sem8 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+            <div class="col-lg-1"></div>
+
+            <div class="col-lg-3" id="overflowTest">
+                {%  for course in sem9 %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="select-courses2" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }} <br>
+                      </label>
+                    </div>
+                {%  endfor %}
+            </div>
+
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-2" align="center">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+{% endblock %}

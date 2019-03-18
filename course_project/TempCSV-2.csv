@@ -1,0 +1,16 @@
+COURSES_ID,CRS_NAME,CRS_SUBJECT,CRS_NO,CRS_TITLE,CS_DEPARTMENT1,CRS_MIN_CRED
+10,RS-020,RS,20,Intro to Christian Doctrine,RS,4
+1000,HIS-160,HIS,160,Mexican History and Civ,HIS,3
+1026,IS-123,IS,123,Culture & Society,IS,4
+1035,IS-190,IS,190,Westmont in San Francisco Internship,IS,2
+1069,POL-116,POL,116,Mexico Relationship With U.S.,POL,3
+1072,SP-005,SP,5,Int Spanish Grammar (III/IV),ML,4
+1073,SP-006,SP,6,Int Spanish Conv (III/IV),ML,2
+1074,SP-105,SP,105,Language in Context,ML,3
+1075,SP-120,SP,120,Advanced Composition,ML,3
+1076,SP-121,SP,121,Advanced Oral Skills,ML,3
+1077,SP-160,SP,160,Survey of Mexican Literature,ML,3
+1217,IS-121,IS,121,Culture & Society,HIS,4
+1218,IS-122,IS,122,Culture & Society,IS,4
+1219,IS-124,IS,124,Culture & Society,HIS,4
+1269,RS-184,RS,184,History of Christianity-Asia,HIS,4

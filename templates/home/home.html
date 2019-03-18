@@ -1,0 +1,24 @@
+{%  extends 'base/base.html' %}
+
+{% block context %}
+
+    <br>
+    <br>
+    <br>
+
+    <div class="container" align="center">
+        {% if user.is_authenticated %}
+            <h4> Hi {{ user.username }}! </h4>
+
+            <p><a href="{% url 'start' %}">Start planning</a></p>
+
+            <p><a href="{% url 'logout' %}">logout</a></p>
+
+        {% else %}
+              <h4>You are logged out.</h4>
+            <br>
+              <a href="{% url 'login' %}">login</a>
+        {% endif %}
+    </div>
+
+{% endblock %}
