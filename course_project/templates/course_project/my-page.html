@@ -27,9 +27,12 @@
                 Dropdown button
               </button>
            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+               {%  for course in course_data %}
+
+                    <a class="dropdown-item" href="#">Action</a>
+                {%  endfor %}
+
+
           </div>
         </div>
         <div class="col-lg-4"></div>
