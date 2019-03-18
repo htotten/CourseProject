@@ -29,5 +29,6 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home/home.html'), name='home'),
     path('start/', my_first_view, name='start'),
     path('a/', create_course_sched, name="add-course"),
-    path('d/', update_course_sched, name="delete-course")
+    path('d/', update_course_sched, name="delete-course"),
+    path('s/', courses_by_dept, name="search_dept")
 ]

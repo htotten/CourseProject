@@ -15,9 +15,12 @@
             <p><a href="{% url 'logout' %}">logout</a></p>
 
         {% else %}
-              <h4>You are logged out.</h4>
+            <h4>You are not logged in.</h4>
             <br>
-              <a href="{% url 'login' %}">login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+            <br>
+            <br>
+            <a href="{% url 'login' %}">Login</a>
         {% endif %}
     </div>
 
