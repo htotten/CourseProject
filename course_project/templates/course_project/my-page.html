@@ -27,9 +27,9 @@
                 Dropdown button
               </button>
            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-               {%  for course in course_data %}
+               {%  for dept in course_depts %}
 
-                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">{{ dept }}</a>
                 {%  endfor %}
 
 
