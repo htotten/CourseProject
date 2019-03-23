@@ -5,31 +5,17 @@ from course_project.models import CourseData
 
 
 def courses_by_dept(request):
-    if request.method=="POST":
+    if request.method == "POST":
         course_data = CourseData.objects.all()
-        i = 0
-        for course in course_data:
-            if i < 5:
-                print(type(course.course_dept))
-                i += 1
-
         user = request.user
         user_courses = CourseEnroll.objects.filter(user=user)
-
-    #    course_ids = request.POST.getlist("select-courses2")
-        user = request.user
-        dept = request.POST.get("select-dept")
-
-     #   courses_qs = CourseData.objects.filter(pk__in=course_ids)
-
-        if dept != "All":
-            print("dept: " + dept)
-            course_data = CourseData.objects.filter(course_dept=dept)  # qs == query set
+        course_dept = request.POST.get("select-dept")
+        if course_dept != "All":
+            course_data = CourseData.objects.filter(course_dept=course_dept)  # qs == query set
 
         course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
                         "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
                         "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
-
 
         data1 = CourseEnroll.objects.filter(user=user, yr1_sem1=True)
         data2 = CourseEnroll.objects.filter(user=user, yr1_sem2=True)
@@ -53,6 +39,6 @@ def courses_by_dept(request):
                    "enrolled_courses": user_courses,
                    "course_data": course_data,
                    "course_depts": course_depts,
-                   "course_dept": dept}
+                   "course_dept": course_dept}
         return render(request, "course_project/my-page.html", context)
 

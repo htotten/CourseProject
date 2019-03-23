@@ -5,27 +5,16 @@ from course_project.models import CourseData
 
 
 def create_course_sched(request):
-    if request.method=="POST":
+    if request.method == "POST":
         course_data = CourseData.objects.all()
         user = request.user
         user_courses = CourseEnroll.objects.filter(user=user)
-
         course_ids = request.POST.getlist("select-courses")
         semester = request.POST.get("select-semester")
-        user = request.user
-
-     #   dept = request.POST.get("select-dept")
-     #   print(dept)
-
-      #  print(" dept? " + request.POST.get("select-dept"))
-
-
-     #   if dept != "All":
-     #       course_data= CourseData.objects.filter(pk__in=course_ids, course_dept=dept)  #qs == query set
-
         course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
                         "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
                         "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+
         courses_qs = CourseData.objects.filter(pk__in=course_ids)
 
         if semester=="yr1-sem1":

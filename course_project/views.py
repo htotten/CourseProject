@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from course_project.models import CourseData
 from add_courses.models import CourseEnroll
 
+course_dept = "All"
+
 
 def my_first_view(request):
     course_data = CourseData.objects.all()
@@ -14,7 +16,9 @@ def my_first_view(request):
     course_depts = ["All", "RS",  "HIS", "IS",  "POL", "ML",  "KNS", "APP",
                     "EB",  "ENG", "PHI", "COM", "BIO", "MA", "TA",
                     "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+    global course_dept
     course_dept = "All"
+
 
     data1 = CourseEnroll.objects.filter(user=user, yr1_sem1=True)
     data2 = CourseEnroll.objects.filter(user=user, yr1_sem2=True)
