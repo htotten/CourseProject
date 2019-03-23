@@ -101,6 +101,9 @@ def my_first_view(request):
             return render(request, "course_project/my-page.html", context)
 
         elif request.POST.keys().__contains__("dept-button"):
+            print("here! ! !")
+            print(request.POST)
+
             course_data = CourseData.objects.all()
             user = request.user
             user_courses = CourseEnroll.objects.filter(user=user)
