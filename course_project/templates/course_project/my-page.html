@@ -32,7 +32,6 @@
                     <a class="dropdown-item" href="#">{{ dept }}</a>
                 {%  endfor %}
 
-
           </div>
         </div>
     <div class="col-lg-4"></div>
@@ -48,7 +47,7 @@
 
 
 
-<form method="POST" action="{%  url 'search-dept' %}" >
+<form method="POST" action="{%  url 'start' %}" >
     {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
 
     <div class="container">
@@ -63,24 +62,17 @@
                       <label class="form-check-label" for="defaultCheck--1">
                         {{ dept }}
                       </label>
-                </div>
-
-
+                    </div>
                 {%  endfor %}
 
-
-
-
             </div>
-
-
 
         </div>
 
     </div>
 
     <div align="center">
-        <button type="submit" class="btn btn-primary">Select Dept</button>
+        <button type="submit" class="btn btn-primary" name="dept-button" value="temp" id="tempid">Select Dept</button>
     </div>
 
 
@@ -106,7 +98,7 @@
     <br>
 
 
-<form method="POST" action="{%  url 'add-course' %}" >
+<form method="POST" action="{%  url 'start' %}" >
     {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
 
     <div class="container">
@@ -207,7 +199,7 @@
     </div>
 
     <div align="center">
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary" name="add-button" value="temp" id="tempid2">Add</button>
     </div>
 
 
@@ -230,7 +222,7 @@
 
 
 
-<form method="POST" action="{%  url 'delete-course' %}" >
+<form method="POST" action="{%  url 'start' %}" >
     {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
 
     <div class="container">
@@ -342,7 +334,7 @@
             <div class="col-lg-2"></div>
 
             <div class="col-lg-2" align="center">
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="submit" class="btn btn-primary" name="delete-button" value="temp" id="tempid3">Delete</button>
             </div>
 
 

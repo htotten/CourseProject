@@ -42,10 +42,10 @@ INSTALLED_APPS = [
    # 'users.apps.UsersConfig',
 
     # our apps
-    'course_project',
-    'add_courses',
-    'delete_courses',
-    'search_dept'
+    'course_project'
+  #  'add_courses',
+  #  'delete_courses',
+  #  'search_dept'
 ]
 
 MIDDLEWARE = [
