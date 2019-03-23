@@ -6,7 +6,9 @@ from course_project.models import CourseData
 
 def update_course_sched(request):
     if request.method=="POST":
-        print(request.POST)
+        course_data = CourseData.objects.all()
+        user = request.user
+        user_courses = CourseEnroll.objects.filter(user=user)
 
         course_ids = request.POST.getlist("select-courses2")
         user = request.user
@@ -30,7 +32,7 @@ def update_course_sched(request):
         data7 = CourseEnroll.objects.filter(user=user, yr4_sem1=True)
         data8 = CourseEnroll.objects.filter(user=user, yr4_sem2=True)
         data9 = CourseEnroll.objects.filter(user=user, extra_sem=True)
-        course_data = CourseData.objects.all()
+
         context = {"sem1": data1,
                    "sem2": data2,
                    "sem3": data3,
@@ -40,8 +42,10 @@ def update_course_sched(request):
                    "sem7": data7,
                    "sem8": data8,
                    "sem9": data9,
+                   "enrolled_courses": user_courses,
                    "course_data": course_data,
-                   "course_depts": course_depts}
+                   "course_depts": course_depts,
+                   "course_dept": course_dept}
         return render(request, "course_project/my-page.html", context)
 
     else:
