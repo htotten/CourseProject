@@ -45,7 +45,7 @@ def update_course_sched(request):
                    "enrolled_courses": user_courses,
                    "course_data": course_data,
                    "course_depts": course_depts,
-                   "course_dept": course_dept}
+                   "course_dept": "All"}
         return render(request, "course_project/my-page.html", context)
 
     else:

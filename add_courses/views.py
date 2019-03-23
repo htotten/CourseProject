@@ -14,14 +14,16 @@ def create_course_sched(request):
         semester = request.POST.get("select-semester")
         user = request.user
 
-        dept = request.POST.get("search-dept")
+      #  print(" dept? " + request.POST.get("select-dept"))
 
-        if dept != "All":
-            course_data= CourseData.objects.filter(pk__in=course_ids, course_dept=dept)  #qs == query set
+
+     #   if dept != "All":
+     #       course_data= CourseData.objects.filter(pk__in=course_ids, course_dept=dept)  #qs == query set
 
         course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
                         "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
                         "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+        courses_qs = CourseData.objects.filter(pk__in=course_ids)
 
         if semester=="yr1-sem1":
             for course in courses_qs:
@@ -73,7 +75,7 @@ def create_course_sched(request):
                   "enrolled_courses": user_courses,
                   "course_data": course_data,
                   "course_depts": course_depts,
-                  "course_dept": dept}
+                  "course_dept": "All"}
         return render(request, "course_project/my-page.html", context)
 
 
