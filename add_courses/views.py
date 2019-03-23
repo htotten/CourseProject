@@ -14,6 +14,9 @@ def create_course_sched(request):
         semester = request.POST.get("select-semester")
         user = request.user
 
+     #   dept = request.POST.get("select-dept")
+     #   print(dept)
+
       #  print(" dept? " + request.POST.get("select-dept"))
 
 

@@ -7,11 +7,16 @@ from course_project.models import CourseData
 def courses_by_dept(request):
     if request.method=="POST":
         course_data = CourseData.objects.all()
+        i = 0
+        for course in course_data:
+            if i < 5:
+                print(type(course.course_dept))
+                i += 1
 
         user = request.user
         user_courses = CourseEnroll.objects.filter(user=user)
 
-        course_ids = request.POST.getlist("select-courses2")
+    #    course_ids = request.POST.getlist("select-courses2")
         user = request.user
         dept = request.POST.get("select-dept")
 
@@ -19,7 +24,7 @@ def courses_by_dept(request):
 
         if dept != "All":
             print("dept: " + dept)
-            course_data = CourseData.objects.filter(pk__in=course_ids, course_dept=dept)  # qs == query set
+            course_data = CourseData.objects.filter(course_dept=dept)  # qs == query set
 
         course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
                         "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
