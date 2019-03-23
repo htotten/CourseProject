@@ -41,11 +41,69 @@
 </div>
 
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
+
+
+
+
+
+
+<form method="POST" action="{%  url 'search_dept' %}" >
+    {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4" id="overflowTest">
+
+                {%  for dept in course_depts %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-dept" value={{ dept }} id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        {{ dept }}
+                      </label>
+                </div>
+
+
+                {%  endfor %}
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Select Dept</button>
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <br>
     <br>
 

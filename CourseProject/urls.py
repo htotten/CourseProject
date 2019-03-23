@@ -20,7 +20,7 @@ from django.views.generic import TemplateView
 from course_project.views import my_first_view
 from add_courses.views import create_course_sched
 from delete_courses.views import update_course_sched
-
+from search_dept.views import courses_by_dept
 
 urlpatterns = [
     path('admin/', admin.site.urls),

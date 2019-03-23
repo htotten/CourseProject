@@ -12,6 +12,10 @@ def update_course_sched(request):
         user = request.user
         courses_qs = CourseEnroll.objects.filter(pk__in=course_ids)
 
+        course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
+                        "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
+                        "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+
         for course in courses_qs:
             route = get_object_or_404(CourseEnroll, pk=course.pk)
             route.delete()
@@ -36,7 +40,8 @@ def update_course_sched(request):
                    "sem7": data7,
                    "sem8": data8,
                    "sem9": data9,
-                   "course_data": course_data}
+                   "course_data": course_data,
+                   "course_depts": course_depts}
         return render(request, "course_project/my-page.html", context)
 
     else:
