@@ -1,23 +1,21 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
 from add_courses.models import CourseEnroll
 from course_project.models import CourseData
 
 
-def update_course_sched(request):
-    if request.method=="POST":
+def courses_by_dept(request):
+    if request.method == "POST":
         course_data = CourseData.objects.all()
         user = request.user
         user_courses = CourseEnroll.objects.filter(user=user)
-        course_ids = request.POST.getlist("select-courses2")
-        courses_qs = CourseEnroll.objects.filter(pk__in=course_ids)
+        course_dept = request.POST.get("select-dept")
+        if course_dept != "All":
+            course_data = CourseData.objects.filter(course_dept=course_dept)  # qs == query set
+
         course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
                         "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
                         "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
-
-        for course in courses_qs:
-            route = get_object_or_404(CourseEnroll, pk=course.pk)
-            route.delete()
 
         data1 = CourseEnroll.objects.filter(user=user, yr1_sem1=True)
         data2 = CourseEnroll.objects.filter(user=user, yr1_sem2=True)
@@ -41,10 +39,6 @@ def update_course_sched(request):
                    "enrolled_courses": user_courses,
                    "course_data": course_data,
                    "course_depts": course_depts,
-                   "course_dept": "All"}
+                   "course_dept": course_dept}
         return render(request, "course_project/my-page.html", context)
-
-
-
-
 

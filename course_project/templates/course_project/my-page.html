@@ -19,29 +19,89 @@
 
 
 
-<div class="container" align="center">
+<div class="container" align="left">
     <div class="row">
-        <div class="col-lg-4"></div>
+
         <div class="col-lg-4">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown button
               </button>
            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+
+               {%  for dept in course_depts %}
+                    <a class="dropdown-item" href="#">{{ dept }}</a>
+                {%  endfor %}
+
+
           </div>
         </div>
+    <div class="col-lg-4"></div>
         <div class="col-lg-4"></div>
     </div>
 </div>
 
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
+
+
+
+
+
+
+<form method="POST" action="{%  url 'search-dept' %}" >
+    {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4" id="overflowTest">
+
+                {%  for dept in course_depts %}
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="select-dept" value={{ dept }} id="defaultCheck--1">
+                      <label class="form-check-label" for="defaultCheck--1">
+                        {{ dept }}
+                      </label>
+                </div>
+
+
+                {%  endfor %}
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Select Dept</button>
+    </div>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <br>
     <br>
 

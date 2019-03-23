@@ -25,7 +25,7 @@ SECRET_KEY = 'h-gpn6c9nsp^3%!+g#%+&h#hvyx1a-i0ewoy-)*=hul%*mte36'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wcplanner.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     # our apps
     'course_project',
     'add_courses',
-    'delete_courses'
+    'delete_courses',
+    'search_dept'
 ]
 
 MIDDLEWARE = [
