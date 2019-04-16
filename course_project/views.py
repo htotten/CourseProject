@@ -10,7 +10,7 @@ def my_first_view(request):
         user = request.user
         user_courses = CourseEnroll.objects.filter(user=user)
         course_depts = ["All", "RS",  "HIS", "IS",  "POL", "ML",  "KNS", "APP",
-                        "EB",  "ENG", "PHI", "COM", "BIO", "MA", "TA",
+                        "EB",  "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
                         "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
         course_dept = "All"
         data1 = CourseEnroll.objects.filter(user=user, yr1_sem1=True)
@@ -46,7 +46,7 @@ def my_first_view(request):
             course_ids = request.POST.getlist("select-courses")
             semester = request.POST.get("select-semester")
             course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
-                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
+                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
                             "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
             courses_qs = CourseData.objects.filter(pk__in=course_ids)
             if semester=="yr1-sem1":
@@ -111,7 +111,7 @@ def my_first_view(request):
             if course_dept != "All":
                 course_data = CourseData.objects.filter(course_dept=course_dept)  # qs == query set
             course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
-                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
+                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
                             "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
             data1 = CourseEnroll.objects.filter(user=user, yr1_sem1=True)
             data2 = CourseEnroll.objects.filter(user=user, yr1_sem2=True)
@@ -144,7 +144,7 @@ def my_first_view(request):
             course_ids = request.POST.getlist("select-courses2")
             courses_qs = CourseEnroll.objects.filter(pk__in=course_ids)
             course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
-                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA",
+                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
                             "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
             for course in courses_qs:
                 route = get_object_or_404(CourseEnroll, pk=course.pk)
