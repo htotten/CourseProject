@@ -3,6 +3,9 @@
 {%  block context %}
 
 
+
+
+
     <div class="container" align="right">
      {% if user.is_authenticated %}
         Hi {{ user.username }}!
@@ -15,29 +18,152 @@
 
 
 
-
-
-
-
 <div class="container" align="left">
     <div class="row">
-
-        <div class="col-lg-4">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-              </button>
-           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-               {%  for dept in course_depts %}
-                    <a class="dropdown-item" href="#">{{ dept }}</a>
-                {%  endfor %}
-
-
-          </div>
+        <div class="column">
+            <div id="wrap">
+                <iframe id="frame" src="https://www.westmont.edu/sites/default/files/2018-06/2018-2019%20College%20Catalog.pdf#page=37" ></iframe>
+            </div>
         </div>
-    <div class="col-lg-4"></div>
-        <div class="col-lg-4"></div>
-    </div>
+
+
+        <div class="col-lg-2">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <form method="POST" action="{%  url 'start' %}" >
+                {%  csrf_token %}
+                <div id="overflowTest3">
+
+                    {%  for dept in course_depts %}
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-dept" value={{ dept }} id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            {{ dept }}
+                          </label>
+                        </div>
+                    {%  endfor %}
+
+                </div>
+
+                <div align="center">
+                    <button type="submit" class="btn btn-primary" name="dept-button" value="temp" id="tempid">Select Dept</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-5">
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <form method="POST" action="{%  url 'start' %}" >
+                {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
+
+
+                <div id="overflowTest3">
+                    {%  for course in course_data %}
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="select-courses" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
+                          <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
+                            {{ course }}
+                          </label>
+                        </div>
+                    {%  endfor %}
+                </div>
+
+                <br>
+
+
+                <div id="overflowTest3">
+                    <i> Year 1 </i>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr1-sem1" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 1
+                          </label>
+                    </div>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr1-sem2" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 2
+                          </label>
+                    </div>
+
+
+                    <i> Year 2 </i>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr2-sem1" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 3
+                          </label>
+                    </div>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr2-sem2" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 4
+                          </label>
+                    </div>
+
+                    <i> Year 3 </i>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr3-sem1" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 5
+                          </label>
+                    </div>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr3-sem2" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 6
+                          </label>
+                    </div>
+
+                    <i> Year 4 </i>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr4-sem1" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 7
+                          </label>
+                    </div>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="yr4-sem2" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 8
+                          </label>
+                    </div>
+
+                    <i> Extra </i>
+                    <div class="form-check">
+                          <input class="form-check-input" type="radio" name="select-semester" value="extra-sem" id="defaultCheck--1">
+                          <label class="form-check-label" for="defaultCheck--1">
+                            Semester 9
+                          </label>
+                    </div>
+
+
+                </div>
+
+                <div align="center">
+                    <button type="submit" class="btn btn-primary" name="add-button" value="temp" id="tempid2">Add</button>
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+
+
 </div>
 
 
@@ -47,190 +173,27 @@
 
 
 
-
-<form method="POST" action="{%  url 'search-dept' %}" >
-    {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4" id="overflowTest">
-
-                {%  for dept in course_depts %}
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-dept" value={{ dept }} id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        {{ dept }}
-                      </label>
-                </div>
-
-
-                {%  endfor %}
-
-
-
-
-            </div>
-
-
-
-        </div>
-
-    </div>
-
-    <div align="center">
-        <button type="submit" class="btn btn-primary">Select Dept</button>
-    </div>
-
-
-</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <br>
-    <br>
-
-
-<form method="POST" action="{%  url 'add-course' %}" >
-    {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-2"></div>
-
-            <div class="col-lg-4" id="overflowTest">
-                {%  for course in course_data %}
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="select-courses" value="{{ course.pk }}" id="defaultCheck--{{ course.pk }}">
-                      <label class="form-check-label" for="defaultCheck--{{ course.pk }}">
-                        {{ course }}
-                      </label>
-                    </div>
-                {%  endfor %}
-            </div>
-
-
-
-            <div class="col-lg-4" id="overflowTest">
-                First Year
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr1-sem1" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 1
-                      </label>
-                </div>
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr1-sem2" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 2
-                      </label>
-                </div>
-
-                <br>
-
-                Second Year
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr2-sem1" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 3
-                      </label>
-                </div>
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr2-sem2" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 4
-                      </label>
-                </div>
-                <br>
-
-                Third Year
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr3-sem1" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 5
-                      </label>
-                </div>
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr3-sem2" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 6
-                      </label>
-                </div>
-                <br>
-
-                Fourth Year
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr4-sem1" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 7
-                      </label>
-                </div>
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="yr4-sem2" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 8
-                      </label>
-                </div>
-                <br>
-
-                Extra
-                <div class="form-check">
-                      <input class="form-check-input" type="radio" name="select-semester" value="extra-sem" id="defaultCheck--1">
-                      <label class="form-check-label" for="defaultCheck--1">
-                        Semester 9
-                      </label>
-                </div>
-
-
-            </div>
-
-            <div class="col-lg-2"></div>
-
-        </div>
-
-    </div>
-
-    <div align="center">
-        <button type="submit" class="btn btn-primary">Add</button>
-    </div>
-
-
-</form>
-
-
-
-
-
-
-
-
-
-
-
-
-<br>
 <br>
 
 
 
 
-<form method="POST" action="{%  url 'delete-course' %}" >
+
+<div class="container">
+        <div class="row">
+            <div class="col-lg-6" align="center" style="background: #BDA9A4">
+                <h4> Year 1 </h4>
+            </div>
+            <div class="col-lg-6" align="center" style="background: #B2C2C1">
+                <h4> Year 2 </h4>
+            </div>
+        </div>
+</div>
+
+
+
+
+<form method="POST" action="{%  url 'start' %}" >
     {%  csrf_token %}  <!-- security thing needed in order to do the post request -->
 
     <div class="container">
@@ -282,6 +245,24 @@
                 {%  endfor %}
             </div>
 
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" align="center" style="background: #B2C2C1">
+                    <h4> Year 3 </h4>
+                </div>
+                <div class="col-lg-6" align="center" style="background: #BDA9A4">
+                    <h4> Year 4 </h4>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
             <div class="col-lg-3" id="overflowTest2">
                 {%  for course in sem5 %}
                     <div class="form-check">
@@ -326,6 +307,19 @@
                 {%  endfor %}
             </div>
 
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-3" align="center" style="background: #BDA9A4">
+                        <h4> Extra </h4>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div class="col-lg-1"></div>
 
             <div class="col-lg-3" id="overflowTest">
@@ -342,7 +336,7 @@
             <div class="col-lg-2"></div>
 
             <div class="col-lg-2" align="center">
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="submit" class="btn btn-primary" name="delete-button" value="temp" id="tempid3">Delete</button>
             </div>
 
 
