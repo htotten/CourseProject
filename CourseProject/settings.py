@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import psycopg2
 
-#DATABASE_URL = os.environ['DATABASE_URL']
+if(os.environ['PRODUCTION'] is None):
+    DATABASE_URL = "postgres://localhost:5432"
+else:
 
-#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -143,8 +147,12 @@ LOGOUT_REDIRECT_URL = 'home'
 
 
 
-#mport dj_database_url
-#DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+
+
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 import django_heroku
 django_heroku.settings(locals())
