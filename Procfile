@@ -1,3 +1,3 @@
-web: gunicorn wcplanner.wsgi --log-file -
+web: gunicorn CourseProject.wsgi --log-file -
 
 
