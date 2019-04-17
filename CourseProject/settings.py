@@ -14,6 +14,7 @@ import os
 import psycopg2
 
 
+
 if(os.environ['PRODUCTION'] is None):
     DATABASE_URL = "postgres://localhost:5432"
 else:
@@ -29,8 +30,9 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 #        DATABASE_URL = os.environ['DATABASE_URL']
 #        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 #except KeyError:
-#    DATABASE_URL = "postgres://localhost:5432"
 
+#DATABASE_URL = "postgres://localhost:5432"
+#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 
@@ -106,10 +108,17 @@ WSGI_APPLICATION = 'CourseProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd35uufrj1sdr0b',
+        'USER': 'sckpaoixbnuedp',
+        'PASSWORD': 'defd0f24d90e2899b7059de7bec36c4569388a7a03119bfedd3600356e09bc7b',
+        'HOST': 'ec2-23-23-173-30.compute-1.amazonaws.com', # Or something like this
+        'PORT': '5432',
     }
 }
 
@@ -165,7 +174,8 @@ LOGOUT_REDIRECT_URL = 'home'
 
 
 import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
 
 import django_heroku
 django_heroku.settings(locals())

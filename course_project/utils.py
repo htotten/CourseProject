@@ -32,7 +32,7 @@ from course_project.models import CourseData
 
 
 
-with open('https://drive.google.com/file/d/1UeWORIHEIYhsnB0oh1Ep7u9YzAcGs1Ec/view?usp=sharing') as csv_file:
+with open('mainCSV.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     x = 0
     for row in csv_reader:
