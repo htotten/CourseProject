@@ -5,14 +5,27 @@ from course_project.models import CourseEnroll
 
 
 def my_first_view(request):
+
+    course_subjects = ["All",
+                       "AN", "APP", "ART", "BIO", "CHM", "COM", "CS", "EB", "ED", "ENG",
+                       "ENV", "FR", "GER", "GRK", "HB", "HIS", "IS", "KNS", "LS", "MA",
+                       "MU", "MUA", "OCP", "PEA", "PHI", "PHS", "PHY", "POL", "PSY", "RS",
+                       "SOC", "SP", "TA"]
+    course_subj = "All"
+    course_data = CourseData.objects.all()
+
     if request.method == "GET":
-        course_data = CourseData.objects.all()
+
+
+        # ---------------------------------------------------------------------------------#
+        # ---------------------------- STARTUP --------------------------------------------#
+        # ---------------------------------------------------------------------------------#
         user = request.user
         user_courses = CourseEnroll.objects.filter(user=user)
-        course_depts = ["All", "RS",  "HIS", "IS",  "POL", "ML",  "KNS", "APP",
-                        "EB",  "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
-                        "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
-        course_dept = "All"
+#        course_depts = ["All", "BS",  "HIS", "IS",  "POL", "ML",  "KNS", "APP",
+#                        "EB",  "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
+#                        "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+#        course_dept = "All"
         data1 = CourseEnroll.objects.filter(user=user, yr1_sem1=True)
         data2 = CourseEnroll.objects.filter(user=user, yr1_sem2=True)
         data3 = CourseEnroll.objects.filter(user=user, yr2_sem1=True)
@@ -33,21 +46,24 @@ def my_first_view(request):
                    "sem9": data9,
                    "enrolled_courses": user_courses,
                    "course_data": course_data,
-                   "course_depts": course_depts,
-                   "course_dept": course_dept}
+                   "course_subjects": course_subjects,
+                   "course_subj": course_subj}
         return render(request, "course_project/my-page.html", context)
 
     elif request.method == "POST":
 
+        # ---------------------------------------------------------------------------------#
+        # ---------------------------- ADDING COURSE(S) -----------------------------------#
+        # ---------------------------------------------------------------------------------#
         if request.POST.keys().__contains__("add-button"):
-            course_data = CourseData.objects.all()
             user = request.user
             user_courses = CourseEnroll.objects.filter(user=user)
+
             course_ids = request.POST.getlist("select-courses")
             semester = request.POST.get("select-semester")
-            course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
-                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
-                            "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+#            course_depts = ["All", "BS", "HIS", "IS", "POL", "ML", "KNS", "APP",
+#                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
+#                            "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
             courses_qs = CourseData.objects.filter(pk__in=course_ids)
             if semester=="yr1-sem1":
                 for course in courses_qs:
@@ -96,23 +112,26 @@ def my_first_view(request):
                       "sem9": data9,
                       "enrolled_courses": user_courses,
                       "course_data": course_data,
-                      "course_depts": course_depts,
-                      "course_dept": "All"}
+                      "course_subjects": course_subjects,
+                      "course_subj": course_subj}
             return render(request, "course_project/my-page.html", context)
 
-        elif request.POST.keys().__contains__("dept-button"):
-            print("here! ! !")
+        #---------------------------------------------------------------------------------#
+        #---------------------------- SELECTED DEPARTMENT --------------------------------#
+        #---------------------------------------------------------------------------------#
+        elif request.POST.keys().__contains__("subj-button"):
             print(request.POST)
 
-            course_data = CourseData.objects.all()
             user = request.user
             user_courses = CourseEnroll.objects.filter(user=user)
-            course_dept = request.POST.get("select-dept")
-            if course_dept != "All":
-                course_data = CourseData.objects.filter(course_dept=course_dept)  # qs == query set
-            course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
-                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
-                            "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+            course_subj = request.POST.get("select-subj")
+            if course_subj != "All":
+                course_data = CourseData.objects.filter(course_subject=course_subj)  # qs == query set
+            else:
+                course_data = CourseData.objects.all()
+#            course_depts = ["All", "BS", "HIS", "IS", "POL", "ML", "KNS", "APP",
+#                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
+#                            "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
             data1 = CourseEnroll.objects.filter(user=user, yr1_sem1=True)
             data2 = CourseEnroll.objects.filter(user=user, yr1_sem2=True)
             data3 = CourseEnroll.objects.filter(user=user, yr2_sem1=True)
@@ -133,19 +152,22 @@ def my_first_view(request):
                        "sem9": data9,
                        "enrolled_courses": user_courses,
                        "course_data": course_data,
-                       "course_depts": course_depts,
-                       "course_dept": course_dept}
+                       "course_subjects": course_subjects,
+                       "course_subj": course_subj}
             return render(request, "course_project/my-page.html", context)
 
+
+        # ---------------------------------------------------------------------------------#
+        # ---------------------------- DELETING COURSE(S) ---------------------------------#
+        # ---------------------------------------------------------------------------------#
         elif request.POST.keys().__contains__("delete-button"):
-            course_data = CourseData.objects.all()
             user = request.user
             user_courses = CourseEnroll.objects.filter(user=user)
             course_ids = request.POST.getlist("select-courses2")
             courses_qs = CourseEnroll.objects.filter(pk__in=course_ids)
-            course_depts = ["All", "RS", "HIS", "IS", "POL", "ML", "KNS", "APP",
-                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
-                            "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
+#            course_depts = ["All", "BS", "HIS", "IS", "POL", "ML", "KNS", "APP",
+#                            "EB", "ENG", "PHI", "COM", "BIO", "MA", "TA", "CS",
+#                            "PHY", "PSY", "CHM", "SOC", "ART", "MU", "ED"]
             for course in courses_qs:
                 route = get_object_or_404(CourseEnroll, pk=course.pk)
                 route.delete()
@@ -169,8 +191,8 @@ def my_first_view(request):
                        "sem9": data9,
                        "enrolled_courses": user_courses,
                        "course_data": course_data,
-                       "course_depts": course_depts,
-                       "course_dept": "All"}
+                       "course_subjects": course_subjects,
+                       "course_subj": course_subj}
             return render(request, "course_project/my-page.html", context)
 
 
