@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home/home.html'), name='home'),
     path('plan/', my_first_view, name='start'),
+    path('resources/', TemplateView.as_view(template_name='res/res.html'), name='res')
   #  path('a/', create_course_sched, name="add-course"),
   #  path('d/', update_course_sched, name="delete-course"),
   #  path('s/', courses_by_dept, name="search-dept")
